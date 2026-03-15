@@ -1,0 +1,135 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Minimal left prompt with additional context modules
+format = """
+$directory\
+$cmd_duration\
+$character"""
+
+right_format = """
+$git_branch\
+$git_status\
+$python\
+$rust\
+$golang\
+$java\
+$nodejs\
+$docker_context\
+$aws\
+$gcloud\
+$kubernetes\
+$battery"""
+
+palette = "catppuccin_macchiato"
+
+command_timeout = 500
+add_newline = true
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+format = '[${symbol}${version}( \($virtualenv\))]($style) '
+symbol = "🐍 "
+style = "yellow"
+
+[nodejs]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "green"
+
+[rust]
+format = "[$symbol$version]($style) "
+symbol = "🦀 "
+style = "red"
+
+[golang]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "cyan"
+
+[java]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "red"
+
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = "🐳 "
+style = "blue"
+only_with_files = true
+
+[aws]
+format = '[$symbol($profile)(\($region\))]($style) '
+symbol = "☁️  "
+style = "peach"
+
+[gcloud]
+format = '[$symbol$account(@$domain)(\($project\))]($style) '
+symbol = "️🇬️ "
+style = "blue"
+disabled = true
+
+[kubernetes]
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = "☸ "
+style = "lavender"
+disabled = false
+detect_files = ['k8s', 'kubernetes', 'Tiltfile']
+
+[battery]
+disabled = false
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "🔋"
+
+[[battery.display]]
+threshold = 30
+style = "red"
+
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"
