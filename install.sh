@@ -28,7 +28,7 @@ fi
 # 3. Brew packages
 echo "==> Installing Homebrew packages..."
 brew install stow starship
-brew install --cask ghostty font-jetbrains-mono-nerd-font
+brew install --cask ghostty font-jetbrains-mono-nerd-font 2>/dev/null || true
 
 # 4. Back up existing configs that would conflict with stow
 BACKUP_DIR="$HOME/.dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
