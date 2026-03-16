@@ -30,7 +30,46 @@ echo "==> Installing Homebrew packages..."
 brew install stow starship
 brew install --cask ghostty font-jetbrains-mono-nerd-font
 
-# 4. Stow packages
+# 4. Back up existing configs that would conflict with stow
+BACKUP_DIR="$HOME/.dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
+CONFLICTS=(
+    .zshrc
+    .zprofile
+    .config/ghostty/config
+    .config/starship/starship.toml
+    .config/git/ignore
+)
+
+found_conflicts=()
+for file in "${CONFLICTS[@]}"; do
+    target="$HOME/$file"
+    if [[ -e "$target" && ! -L "$target" ]]; then
+        found_conflicts+=("$file")
+    fi
+done
+
+if [[ ${#found_conflicts[@]} -gt 0 ]]; then
+    echo ""
+    echo "==> WARNING: The following existing configs will be replaced:"
+    for file in "${found_conflicts[@]}"; do
+        echo "    ~/$file"
+    done
+    echo ""
+    echo "    They will be backed up to $BACKUP_DIR"
+    echo ""
+    read -rp "    Continue? [y/N] " answer
+    if [[ "$answer" != [yY] ]]; then
+        echo "    Aborted."
+        exit 1
+    fi
+    for file in "${found_conflicts[@]}"; do
+        mkdir -p "$BACKUP_DIR/$(dirname "$file")"
+        mv "$HOME/$file" "$BACKUP_DIR/$file"
+        echo "    Moved ~/$file"
+    done
+fi
+
+# 5. Stow packages
 echo "==> Linking dotfiles with stow..."
 cd "$DOTFILES_DIR"
 stow -v -t ~ "${PACKAGES[@]}"
