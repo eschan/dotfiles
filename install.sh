@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(zsh ghostty starship git)
+PACKAGES=(zsh ghostty starship git vim)
 
 echo "==> Dotfiles bootstrap starting..."
 
@@ -38,6 +38,7 @@ CONFLICTS=(
     .config/ghostty/config
     .config/starship/starship.toml
     .config/git/ignore
+    .vimrc
 )
 
 found_conflicts=()

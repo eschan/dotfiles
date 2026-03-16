@@ -10,6 +10,7 @@ My macOS dotfiles, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 | `ghostty` | `.config/ghostty/config` | [Ghostty](https://ghostty.org/) terminal emulator settings |
 | `starship` | `.config/starship/starship.toml` | [Starship](https://starship.rs/) cross-shell prompt |
 | `git` | `.config/git/ignore` | Global git ignore patterns |
+| `vim` | `.vimrc` | Vim editor settings |
 
 ## How it works
 
@@ -22,6 +23,7 @@ Symlink                              ->  Target in repo
 ~/.config/ghostty/config             ->  ghostty/.config/ghostty/config
 ~/.config/starship/starship.toml     ->  starship/.config/starship/starship.toml
 ~/.config/git/ignore                 ->  git/.config/git/ignore
+~/.vimrc                             ->  vim/.vimrc
 ```
 
 Configs that live in `~/.config/` have a nested `.config/` path in the repo so stow knows where to place the symlink.
@@ -51,7 +53,7 @@ The bootstrap script installs Xcode CLT, Homebrew, stow, starship, ghostty, and 
 
 ```bash
 cd ~/Developer/eschan/dotfiles
-stow -t ~ zsh ghostty starship git
+stow -t ~ zsh ghostty starship git vim
 ```
 
 ### Unlinking
